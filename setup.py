@@ -108,7 +108,7 @@ setup(
     # If your package is a single module, use this instead of 'packages':
     # py_modules=['mypackage'],
 
-    entry_points= },
+    entry_points={},
     install_requires=REQUIRED,
     extras_require={
         'cli': cli_extras,
