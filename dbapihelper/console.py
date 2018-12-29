@@ -11,12 +11,10 @@ from tabulate import tabulate
 
 
 def loop(cursor, reserved=None, history_file=None, *args, **kwargs):
-    if history_file:
-        history = FileHistory(history_file)
-
     lexer = PygmentsLexer(SqlLexer)
     completer = WordCompleter(reserved, ignore_case=True)
     style = style_from_pygments_cls(get_style_by_name('manni'))
+    history = FileHistory(history_file) if history_file else None
 
     while True:
         try:
