@@ -10,7 +10,13 @@ from pygments.styles import get_style_by_name
 from tabulate import tabulate
 
 
-def loop(cursor, reserved=None, history_file=None, *args, **kwargs):
+def loop(
+        cursor,
+        reserved=None,
+        history_file=None,
+        raise_=False,
+        *args,
+        **kwargs):
     lexer = PygmentsLexer(SqlLexer)
     completer = WordCompleter(reserved, ignore_case=True)
     style = style_from_pygments_cls(get_style_by_name('manni'))
@@ -30,7 +36,7 @@ def loop(cursor, reserved=None, history_file=None, *args, **kwargs):
             try:
                 result = cursor.execute(query, *args, **kwargs)
             except Exception as e:
-                if arguments['--raise']:
+                if raise_:
                     raise
                 print(e)
                 continue

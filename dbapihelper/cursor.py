@@ -3,6 +3,8 @@ from __future__ import division
 from __future__ import print_function
 from __future__ import unicode_literals
 
+import itertools
+
 from dbapihelper.exceptions import NotSupportedError
 from dbapihelper.utils import apply_parameters, check_closed, check_result
 
