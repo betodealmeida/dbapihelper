@@ -14,6 +14,9 @@ class Cursor(object):
     """Connection cursor."""
 
     def __init__(self, *args, **kwargs):
+        for k, v in kwargs.items():
+            setattr(self, k, v)
+
         # This read/write attribute specifies the number of rows to fetch at a
         # time with .fetchmany(). It defaults to 1 meaning to fetch a single
         # row at a time.
@@ -42,11 +45,12 @@ class Cursor(object):
     def execute(self, operation, parameters=None, *args, **kwargs):
         self.description = None
         query = apply_parameters(operation, parameters or {})
-        self._results = self._set_results(query, *args, **kwargs)
+        self._set_results(query, *args, **kwargs)
         return self
 
-    def _set_results(self, query, *args, **kwargs):
-        raise NotImplementedError('Subclasses should implement `_set_results`')
+    def _set_results_and_description(self, query, *args, **kwargs):
+        raise NotImplementedError(
+            'Subclasses should implement `_set_results_and_description`')
 
     @check_closed
     def executemany(self, operation, seq_of_parameters=None):
