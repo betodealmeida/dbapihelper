@@ -1,7 +1,7 @@
 docopt==0.6.2
 tabulate==0.8.2
 setuptools==40.2.0
-Pygments==2.2.0
+Pygments==2.7.4
 prompt_toolkit==2.0.4
 SQLAlchemy==1.2.11
 six==1.11.0
